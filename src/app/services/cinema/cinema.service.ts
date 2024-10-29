@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
 import { environment } from '../../../environment/environment';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CitiesService {
+export class CinemaService {
 
   constructor(private http: HttpClient) { }
-  getCities() {
+  getCinemas() {
     try {
-      return this.http.get(environment.BASE_URL+"/cities")
+      return this.http.get(environment.BASE_URL+"/cinemas")
     } catch (error) {
       return throwError(error);
     }
