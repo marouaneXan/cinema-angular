@@ -1,30 +1,30 @@
 import { Component } from '@angular/core';
 import { CinemaService } from '../../services/cinema/cinema.service';
+import { SharedDataService } from '../../services/shared-data/shared-data.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cinemas',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    NgbModule
+  ],
   templateUrl: './cinemas.component.html',
   styleUrl: './cinemas.component.scss'
 })
 export class CinemasComponent {
-  cinemas: any=[];
+  cinemas: any = [];
+  active = 1
 
-  constructor(private cinemaSrv: CinemaService) { }
+  constructor(private cinemaSrv: CinemaService, private sharedSrv: SharedDataService) { }
 
   ngOnInit(): void {
-    this.getAllCinemas();
-    console.log(this.cinemas);
-  }
-  getAllCinemas() {
-    this.cinemaSrv.getCinemas().subscribe(c => {
-      this.cinemas = c;
-      console.log(c);
-      
-    },
-      err => {
-        alert('Failed to load cinemas. Please try again later.');
-      })
+    this.sharedSrv.cinemasByCity$.subscribe(
+      cinema => {
+        this.cinemas = cinema
+      }
+    )
   }
 }

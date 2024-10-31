@@ -1,4 +1,4 @@
 <div class="list-group" id="list-tab" role="tablist">
     <a *ngFor="let c of cities" class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" role="tab"
-        aria-controls="home">{{c.name}}</a>
+        aria-controls="home" style="cursor: pointer;" (click)="getCinemasByCity(c.id)">{{c.name}}</a>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CitiesService } from '../../services/cities/cities.service';
 import { CommonModule } from '@angular/common';
+import { CinemaService } from '../../services/cinema/cinema.service';
+import { SharedDataService } from '../../services/shared-data/shared-data.service';
 
 @Component({
   selector: 'app-cities',
@@ -11,12 +13,12 @@ import { CommonModule } from '@angular/common';
 })
 export class CitiesComponent implements OnInit {
   cities: any=[];
+  existedCinemasByCity: any=[];
 
-  constructor(private cSrv: CitiesService) { }
+  constructor(private cSrv: CitiesService,private cinemaSrv: CinemaService,private sharedSrv: SharedDataService) { }
 
   ngOnInit(): void {
     this.getAllCities();
-    console.log(this.cities);
   }
   getAllCities() {
     this.cSrv.getCities().subscribe(c => {
@@ -26,6 +28,15 @@ export class CitiesComponent implements OnInit {
     },
       err => {
         alert('Failed to load cities. Please try again later.');
+      })
+  }
+
+  getCinemasByCity(ville_id:any) {
+    this.cinemaSrv.getCinemasByCity(ville_id).subscribe(c => {
+      this.sharedSrv.updateCinemasByCity(c)
+    },
+      err => {
+        alert('Failed to load cinemas. Please try again later.');
       })
   }
 
