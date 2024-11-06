@@ -14,6 +14,7 @@ import { SharedDataService } from '../../services/shared-data/shared-data.servic
 export class CitiesComponent implements OnInit {
   cities: any=[];
   existedCinemasByCity: any=[];
+  selectedCityId:any
 
   constructor(private cSrv: CitiesService,private cinemaSrv: CinemaService,private sharedSrv: SharedDataService) { }
 
@@ -32,6 +33,7 @@ export class CitiesComponent implements OnInit {
   }
 
   getCinemasByCity(ville_id:any) {
+    this.selectedCityId = ville_id;
     this.cinemaSrv.getCinemasByCity(ville_id).subscribe(c => {
       this.sharedSrv.updateCinemasByCity(c)
     },

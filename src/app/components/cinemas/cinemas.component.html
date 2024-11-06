@@ -8,14 +8,21 @@
                     <div class="col-12 col-md-6 mb-4 d-flex">
                         <div class="card w-100">
                             <div class="card-header">
-                              Featured
+                                Featured
                             </div>
                             <div class="card-body">
-                              <h5 class="card-title">Special title treatment</h5>
-                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <div class="row gap-4">
+                                    <img class="col-md-4" src="..." alt="Film Image">
+                                    <div class="col-md-7">
+                                        <div class="list-group" id="list-tab" role="tablist">
+                                            <a *ngFor="let s of seances" class="list-group-item list-group-item-action" id="list-home-list"
+                                                data-toggle="list" role="tab" aria-controls="home"
+                                                style="cursor: pointer;">{{ s.heureDebut.split("T")[1].substring(0, 5) }}</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </ng-template>

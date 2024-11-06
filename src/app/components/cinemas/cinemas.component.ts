@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CinemasComponent {
   cinemas: any = [];
+  seances: any = [];
   active = 1
 
   constructor(private cinemaSrv: CinemaService, private sharedSrv: SharedDataService) { }
@@ -24,6 +25,11 @@ export class CinemasComponent {
     this.sharedSrv.cinemasByCity$.subscribe(
       cinema => {
         this.cinemas = cinema
+      }
+    )
+    this.cinemaSrv.getSeances().subscribe(
+      (res: any) => {
+        this.seances = res._embedded?.seances;
       }
     )
   }

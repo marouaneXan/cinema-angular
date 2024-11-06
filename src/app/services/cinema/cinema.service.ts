@@ -24,4 +24,11 @@ export class CinemaService {
       return throwError(error);
     }
   }
+  getSeances() {
+    try {
+      return this.http.get(environment.BASE_URL+"/seances")
+    } catch (error) {
+      return throwError(error);
+    }
+  }
 }
