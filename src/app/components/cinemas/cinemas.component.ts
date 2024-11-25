@@ -16,6 +16,8 @@ import { CommonModule } from '@angular/common';
 })
 export class CinemasComponent {
   cinemas: any = [];
+  seances: any = [];
+  projection:any=[]
   active = 1
 
   constructor(private cinemaSrv: CinemaService, private sharedSrv: SharedDataService) { }
@@ -26,5 +28,22 @@ export class CinemasComponent {
         this.cinemas = cinema
       }
     )
+
+    this.cinemaSrv.getSeances().subscribe(
+      s => {
+        this.seances = s
+      }
+    )
+  }
+
+  getProjectionsByCinema(cinemaID:any) {
+    this.cinemaSrv.getProjectionsByCinema(cinemaID).subscribe(p => {
+      this.projection=p
+      console.log(p);
+      
+    },
+      err => {
+        alert('Failed to load cinemas. Please try again later.');
+      })
   }
 }
